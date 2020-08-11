@@ -1,0 +1,43 @@
+{
+  "name": "byakko",
+  "version": "0.1.0",
+  "description": "Frontend flow control (P)react & Mobx based",
+  "main": "dist/main.js",
+  "scripts": {
+    "build": "tsc -p .",
+    "build:watch": "node fuse.js build:watch",
+    "test": "node fuse.js test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MrMaxie/Byakko.git"
+  },
+  "author": "Maciej \"Maxie\" Mienko",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/MrMaxie/Byakko/issues"
+  },
+  "homepage": "https://github.com/MrMaxie/Byakko#readme",
+  "devDependencies": {
+    "@types/node": "14.0.27",
+    "@types/react": "16.9.46",
+    "babel-core": "6.26.3",
+    "babel-plugin-transform-react-jsx": "6.24.1",
+    "fuse-box": "3.7.1",
+    "mobx": "5.15.5",
+    "preact": "10.4.7",
+    "terser": "5.0.0",
+    "typescript": "3.9.7",
+    "uglify-js": "3.10.1",
+    "mobx-react": "6.2.5"
+  },
+  "engines": {
+    "node": ">=10.0.0"
+  },
+  "peerDependencies": {
+    "mobx": ">=5.0.0",
+    "react": ">=16.0.0",
+    "preact": ">=10.0.0",
+    "mobx-react": ">=6.0.0"
+  }
+}
