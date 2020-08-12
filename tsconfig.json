@@ -16,6 +16,7 @@
         "experimentalDecorators": true,
         "esModuleInterop": true,
         "noImplicitReturns": false,
+        "removeComments": true,
         "paths": {
             "~/*": [
                 "./*"

@@ -15,3 +15,5 @@ export class Later<T extends ([] | {}), K extends keyof T, Res = T[K]> {
 export const later = <T extends ([] | {}), K extends keyof T>(target: T, key: K): {
     get: () => T[K];
 } => new Later(target, key);
+
+export const isLater = (x: any): x is Later<any, any, any> => x instanceof Later;

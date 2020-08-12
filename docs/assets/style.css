@@ -1,0 +1,128 @@
+* {
+    scrollbar-width: thin;
+    scrollbar-color: #323238 #121215;
+}
+
+*::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+*::-webkit-scrollbar-corner {
+    background: transparent;
+}
+
+*::-webkit-scrollbar-track {
+    background: #121215;
+}
+
+*::-webkit-scrollbar-thumb {
+    background: #323238;
+}
+
+#logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    flex-direction: column;
+    color: white;
+    font-size: 1.2rem;
+    font-weight: 200;
+}
+
+#logo img {
+    width: 75px;
+}
+
+#list {
+    flex: 1;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+a {
+    text-decoration: none;
+    color: #2f87e5;
+}
+
+body {
+    font-family: 'Fira Sans', sans-serif;
+    font-size: 16px;
+    padding: 0;
+    margin: 5px;
+    margin-left: 0;
+    padding-left: 350px;
+    background-color: #fff;
+    scroll-behavior: smooth;
+    color: #1f2024;
+}
+
+aside {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    height: 100vh;
+    width: 300px;
+    background-color: #1f2024;
+    color: #aaafbd;
+    z-index: 500;
+    display: flex;
+    flex-direction: column;
+}
+
+aside a {
+    display: block;
+    width: 100%;
+    padding: 10px 15px;
+    box-sizing: border-box;
+    transition: .3s background-color, .3s color;
+    color: #aaafbd;
+}
+
+aside a:hover {
+    background-color: rgba(0, 0, 0, .5);
+    cursor: pointer;
+    color: white;
+}
+
+aside .header {
+    font-size: .8rem;
+    padding: 10px 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+aside .header:after,
+aside .header:before {
+    content: '';
+    height: 1px;
+    background-color: currentColor;
+    opacity: .3;
+    width: 20px;
+    margin: 0 10px;
+}
+
+aside .header:after {
+    flex: 1;
+}
+
+h1 {
+    position: relative;
+}
+
+h1 a {
+    display: block;
+    position: absolute;
+    left: -50px;
+    width: 50px;
+    text-align: center;
+    color: #d2d2d2;
+    font-weight: normal;
+}
+
+code {
+    font-family: 'Fira Code', monospace !important;
+}

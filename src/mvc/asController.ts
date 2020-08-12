@@ -15,12 +15,3 @@ export const asController = (data: ControllerData = {}) => {
 };
 
 asController.controllers = Controllers;
-
-@asController({
-    path: '/',
-    name: 'Test',
-    data: [10],
-})
-class Test {
-
-}

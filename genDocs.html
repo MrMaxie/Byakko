@@ -1,0 +1,71 @@
+<script role="main">
+    const { Parser, HtmlRenderer } = require('commonmark');
+
+    load([
+        'template',
+        'header',
+        'theme',
+        'style',
+        'footer',
+        'Component-Each-md',
+    ])
+        .then(([template, header, theme, style, footer, c1]) => {
+            const reader = new Parser();
+            const writer = new HtmlRenderer();
+            const parsed = reader.parse(c1);
+            const c1Html = writer.render(parsed);
+
+            const html = template
+                .replace('$header', header)
+                .replace('$footer', footer)
+                .replace('$style', [theme, style].map(x => `<style>${x}</style>`).join(''))
+                .replace('$body', [
+                    c1Html,
+                ].join(''));
+
+            save(html);
+        });
+</script>
+
+<script id="template">
+    <html>
+        <head>
+            $header
+            $style
+        </head>
+        <body>
+            <body>
+                <aside>
+                    <div id="logo">
+                        <img src="assets/logo.png" />
+                        Byakko
+                    </div>
+                    <div id="list">
+                        <a href="#readme">Readme</a>
+                        <div class="header"><span>Components</span></div>
+                        <a href="#Each">Each</a>
+                    </div>
+                </aside>
+                $body
+            </body>
+            $footer
+        </body>
+    </html>
+</script>
+
+<script id="theme" src="./docs/assets/prism-custom-theme.css"></script>
+
+<style id="style" src="./docs/assets/style.css"/>
+
+<template id="header">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code&family=Fira+Sans:wght@200;400;700&display=swap" rel="stylesheet">
+</template>
+
+<template id="footer">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.21.0/prism.min.js" integrity="sha512-WkVkkoB31AoI9DAk6SEEEyacH9etQXKUov4JRRuM1Y681VsTq7jYgrRw06cbP6Io7kPsKx+tLFpH/HXZSZ2YEQ==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.21.0/components/prism-typescript.min.js" integrity="sha512-5KnWNKu6jz8OE4nIBndz3PZ4O3RGqcPNcsyEFZkx3F5N8liSwc3bCe4qPOa/a3+e4CxVl0izHMXeZ0Z4yk7LTA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.21.0/components/prism-jsx.min.js" integrity="sha512-QORDihY3o14OZOxXmZxNbdPo4XkiD98/Wt/D8PQG5va4gLb63ZnCanJORVfpzetcJX/Dz4TTFT/I3oRe8O1/Sw==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.21.0/components/prism-tsx.min.js" integrity="sha512-eDMuXl7Gh0FNL+G7rz0Gqiv9+sbuynK/TnKvrT0TU7nyfkfsO0MR2EERxdCxT7dkOHKlQAmS5CKv+p4XDZcKNQ==" crossorigin="anonymous"></script>
+</template>
+
+<script id="Component-Each-md" src="./docs/md/Component.Each.md"></script>

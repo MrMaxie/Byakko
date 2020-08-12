@@ -1,0 +1,346 @@
+
+    <html>
+        <head>
+            
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code&amp;family=Fira+Sans:wght@200;400;700&amp;display=swap" rel="stylesheet">
+
+            <style>/* Generated with http://k88hudson.github.io/syntax-highlighting-theme-generator/www */
+/* http://k88hudson.github.io/react-markdocs */
+/**
+ * @author k88hudson
+ *
+ * Based on prism.js default theme for JavaScript, CSS and HTML
+ * Based on dabblet (http://dabblet.com)
+ * @author Lea Verou
+ */
+/*********************************************************
+* General
+*/
+pre[class*="language-"],
+code[class*="language-"] {
+  color: #e06c75;
+  font-size: .8rem;
+  text-shadow: none;
+  font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  direction: ltr;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  line-height: 1.5;
+  -moz-tab-size: 4;
+  -o-tab-size: 4;
+  tab-size: 4;
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
+pre[class*="language-"]::selection,
+code[class*="language-"]::selection,
+pre[class*="language-"]::mozselection,
+code[class*="language-"]::mozselection {
+  text-shadow: none;
+  background: #bfbab0;
+}
+@media print {
+  pre[class*="language-"],
+  code[class*="language-"] {
+    text-shadow: none;
+  }
+}
+pre[class*="language-"] {
+  padding: 1em;
+  margin: .5em 0;
+  overflow: auto;
+  background: #0f1419;
+}
+:not(pre) > code[class*="language-"] {
+  padding: .1em .3em;
+  border-radius: .3em;
+  color: #bfbab0;
+  background: #0f1419;
+}
+/*********************************************************
+* Tokens
+*/
+.namespace {
+  opacity: .7;
+}
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+  color: #7f848e;
+}
+.token.punctuation {
+  color: #bfbab0;
+}
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol,
+.token.deleted {
+  color: #d19a66;
+}
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+  color: #98c379;
+}
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string {
+  color: #abb2bf;
+  background: #0f1419;
+}
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+  color: #c678dd;
+}
+.token.function {
+  color: #56b6c2;
+}
+.token.regex,
+.token.important,
+.token.variable {
+  color: #61afef;
+}
+.token.important,
+.token.bold {
+  font-weight: bold;
+}
+.token.italic {
+  font-style: italic;
+}
+.token.entity {
+  cursor: help;
+}
+/*********************************************************
+* Line highlighting
+*/
+pre[data-line] {
+  position: relative;
+}
+pre[class*="language-"] > code[class*="language-"] {
+  position: relative;
+  z-index: 1;
+}
+.line-highlight {
+  position: absolute;
+  left: 0;
+  right: 0;
+  padding: inherit 0;
+  margin-top: 1em;
+  background: #0f1419;
+  box-shadow: inset 5px 0 0 #0f1419;
+  z-index: 0;
+  pointer-events: none;
+  line-height: inherit;
+  white-space: pre;
+}
+</style><style>
+    * {
+        scrollbar-width: thin;
+        scrollbar-color: #323238 #121215;
+    }
+
+    *::-webkit-scrollbar {
+        width: 10px;
+        height: 10px;
+    }
+
+    *::-webkit-scrollbar-corner {
+        background: transparent;
+    }
+
+    *::-webkit-scrollbar-track {
+        background: #121215;
+    }
+
+    *::-webkit-scrollbar-thumb {
+        background: #323238;
+    }
+
+    #logo {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 10px;
+        flex-direction: column;
+        color: white;
+        font-size: 1.2rem;
+        font-weight: 200;
+    }
+
+    #logo img {
+        width: 75px;
+    }
+
+    #list {
+        flex: 1;
+        overflow-x: hidden;
+        overflow-y: scroll;
+    }
+
+    a {
+        text-decoration: none;
+        color: #2f87e5;
+    }
+
+    body {
+        font-family: 'Fira Sans', sans-serif;
+        font-size: 16px;
+        padding: 0;
+        margin: 5px;
+        margin-left: 0;
+        padding-left: 350px;
+        background-color: #fff;
+        scroll-behavior: smooth;
+        color: #1f2024;
+    }
+
+    aside {
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        height: 100vh;
+        width: 300px;
+        background-color: #1f2024;
+        color: #aaafbd;
+        z-index: 500;
+        display: flex;
+        flex-direction: column;
+    }
+
+    aside a {
+        display: block;
+        width: 100%;
+        padding: 10px 15px;
+        box-sizing: border-box;
+        transition: .3s background-color, .3s color;
+        color: #aaafbd;
+    }
+
+    aside a:hover {
+        background-color: rgba(0, 0, 0, .5);
+        cursor: pointer;
+        color: white;
+    }
+
+    aside .header {
+        font-size: .8rem;
+        padding: 10px 0;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+
+    aside .header:after,
+    aside .header:before {
+        content: '';
+        height: 1px;
+        background-color: currentColor;
+        opacity: .3;
+        width: 20px;
+        margin: 0 10px;
+    }
+
+    aside .header:after {
+        flex: 1;
+    }
+
+    h1 {
+        position: relative;
+    }
+
+    h1 a {
+        display: block;
+        position: absolute;
+        left: -50px;
+        width: 50px;
+        text-align: center;
+        color: #d2d2d2;
+        font-weight: normal;
+    }
+
+    code {
+        font-family: 'Fira Code', monospace !important;
+    }
+</style>
+        </head>
+        <body>
+            <body>
+                <aside>
+                    <div id="logo">
+                        <img src="assets/logo.png" />
+                        Byakko
+                    </div>
+                    <div id="list">
+                        <a href="#readme">Readme</a>
+                        <div class="header"><span>Components</span></div>
+                        <a href="#Each">Each</a>
+                    </div>
+                </aside>
+                <h1 id="Each">
+    <a href="#Each">#</a>
+    Each
+</h1>
+<p>Component that allows you to iterate trough iterable variable. Works the best with <a href="#later">later</a> because it's possible to omit all rerendering stack and render only that list elements.</p>
+<p>Props</p>
+<ul>
+<li>value : <code>Later | any[]</code></li>
+<li>render : <code>(item: any, index: number) =&gt; JSX.Eelement</code></li>
+</ul>
+<p>Example #1 - raw usage</p>
+<pre><code class="language-tsx">type Item = { id: number; name: string; };
+
+const renderItem = (item: Item, index: number) =&gt; (
+    &lt;div key={item.id}&gt;{item.name} at {index} position&lt;/div&gt;
+);
+
+const ExampleComponent = (props: { list: Item[] }) =&gt; (
+    &lt;Each value={props.list} render={renderItem} /&gt;
+);
+
+// ExampleComponent need to be rerendered to rerender list
+</code></pre>
+<p>Example #2 - <a href="#later">later</a> usage</p>
+<pre><code class="language-tsx">type Item = { id: number; name: string; };
+
+// Create store holding that value
+class Store {
+    @observable // Mobx @observable decorator
+    list: Item[] = [];
+}
+const store = new Store();
+
+const renderItem = (item: Item, index: number) =&gt; (
+    &lt;div key={item.id}&gt;{item.name} at {index} position&lt;/div&gt;
+);
+
+const ExampleComponent = () =&gt; (
+    &lt;Each value={later(store, 'list')} render={renderItem} /&gt;
+);
+
+// ExampleComponent will be rendered once
+</code></pre>
+
+            </body>
+            
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.21.0/prism.min.js" integrity="sha512-WkVkkoB31AoI9DAk6SEEEyacH9etQXKUov4JRRuM1Y681VsTq7jYgrRw06cbP6Io7kPsKx+tLFpH/HXZSZ2YEQ==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.21.0/components/prism-typescript.min.js" integrity="sha512-5KnWNKu6jz8OE4nIBndz3PZ4O3RGqcPNcsyEFZkx3F5N8liSwc3bCe4qPOa/a3+e4CxVl0izHMXeZ0Z4yk7LTA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.21.0/components/prism-jsx.min.js" integrity="sha512-QORDihY3o14OZOxXmZxNbdPo4XkiD98/Wt/D8PQG5va4gLb63ZnCanJORVfpzetcJX/Dz4TTFT/I3oRe8O1/Sw==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.21.0/components/prism-tsx.min.js" integrity="sha512-eDMuXl7Gh0FNL+G7rz0Gqiv9+sbuynK/TnKvrT0TU7nyfkfsO0MR2EERxdCxT7dkOHKlQAmS5CKv+p4XDZcKNQ==" crossorigin="anonymous"></script>
+
+        </body>
+    </html>
