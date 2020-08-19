@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>byakko</title>
+        <link rel="stylesheet" href="assets/syntax-style.css" >
+        <link rel="stylesheet" href="assets/style.css" >
+        <link href="https://fonts.googleapis.com/css2?family=Fira+Code&amp;family=Fira+Sans:wght@200;400;700&amp;display=swap" rel="stylesheet">
+        <script src="assets/wave.js"></script>
+    </head>
+    <body>
+        <main>
+            <canvas id="wave"></canvas>
+            <img src="assets/logon.png" alt="byakko" />
+        </main>
+        <aside>
+            <div class="logo">
+                <img src="assets/logon.png" alt="byakko" />
+            </div>
+
+            <div class="list">
+                <a href="#wave">
+                    <badge type="e"></badge> ~ <span>Welcome</span>
+                </a>
+                <div class="header"><span>API</span></div>
+                <% for (const x of items) { %>
+                    <a href="#<%= x.name %>">
+                        <badge type="<%= x.type[0].toLowerCase() %>"></badge> ~ <span><%= x.name %></span>
+                    </a>
+                <% } %>
+            </div>
+        </aside>
+        <div class="content">
+            <% for (const x of items) { %>
+                <h1 id="<%= x.name %>">
+                    <a href="#<%= x.name %>">#</a>
+                    <%= x.name %>
+                </h1>
+                <%- x.body %>
+            <% } %>
+        </div>
+    </body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.21.0/prism.min.js" integrity="sha512-WkVkkoB31AoI9DAk6SEEEyacH9etQXKUov4JRRuM1Y681VsTq7jYgrRw06cbP6Io7kPsKx+tLFpH/HXZSZ2YEQ==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.21.0/components/prism-typescript.min.js" integrity="sha512-5KnWNKu6jz8OE4nIBndz3PZ4O3RGqcPNcsyEFZkx3F5N8liSwc3bCe4qPOa/a3+e4CxVl0izHMXeZ0Z4yk7LTA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.21.0/components/prism-jsx.min.js" integrity="sha512-QORDihY3o14OZOxXmZxNbdPo4XkiD98/Wt/D8PQG5va4gLb63ZnCanJORVfpzetcJX/Dz4TTFT/I3oRe8O1/Sw==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.21.0/components/prism-tsx.min.js" integrity="sha512-eDMuXl7Gh0FNL+G7rz0Gqiv9+sbuynK/TnKvrT0TU7nyfkfsO0MR2EERxdCxT7dkOHKlQAmS5CKv+p4XDZcKNQ==" crossorigin="anonymous"></script>
+<body>

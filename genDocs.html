@@ -1,5 +1,30 @@
 <script role="main">
+    const fs = require('fs');
+    const { join } = require('path');
+    const util = require('util');
     const { Parser, HtmlRenderer } = require('commonmark');
+
+    const readdir = util.promisify(fs.readdir);
+
+    (async () => {
+        const files = await fs.readdir(join('docs', 'md'));
+        console.log(files);
+        const [
+            template,
+            header,
+            theme,
+            style,
+            footer,
+        ] = await load([
+            'template',
+            'header',
+            'theme',
+            'style',
+            'footer',
+        ]);
+    })();
+
+    /*
 
     load([
         'template',
@@ -7,29 +32,38 @@
         'theme',
         'style',
         'footer',
-        'Component-Each-md',
     ])
-        .then(([template, header, theme, style, footer, c1]) => {
-            const reader = new Parser();
-            const writer = new HtmlRenderer();
-            const parsed = reader.parse(c1);
-            const c1Html = writer.render(parsed);
+        .then(([template, header, theme, style, footer, ...mds]) => {
+            mds = mds.map(x => (new HtmlRenderer()).render((new Parser()).parse(x)));
 
             const html = template
                 .replace('$header', header)
                 .replace('$footer', footer)
                 .replace('$style', [theme, style].map(x => `<style>${x}</style>`).join(''))
-                .replace('$body', [
-                    c1Html,
-                ].join(''));
+                .replace('$body', mds.join(''))
+                .replace('$apiList', Object.entries({
+                    'Each': 'c',
+                    'If': 'c',
+                    'Unless': 'c',
+                    'asController': 'd',
+                    'later': 'f',
+                    'isLater': 'f',
+                    'Later': 't',
+                })
+                .sort((a, b) => a[0].localeCompare(b[0]))
+                .map(([name, type]) =>
+                    `<a href="#${name}"><badge type="${type}"></badge> # <span>${name}</span></a>`
+                ).join(''));
 
             save(html);
         });
+    */
 </script>
 
 <script id="template">
     <html>
         <head>
+            <meta charset="utf-8"/>
             $header
             $style
         </head>
@@ -41,9 +75,9 @@
                         Byakko
                     </div>
                     <div id="list">
-                        <a href="#readme">Readme</a>
-                        <div class="header"><span>Components</span></div>
-                        <a href="#Each">Each</a>
+                        <a href="#readme"><span>Readme</span></a>
+                        <div class="header"><span>API</span></div>
+                        $apiList
                     </div>
                 </aside>
                 $body
@@ -55,7 +89,7 @@
 
 <script id="theme" src="./docs/assets/prism-custom-theme.css"></script>
 
-<style id="style" src="./docs/assets/style.css"/>
+<style id="style" src="./docs/assets/style.css"></style>
 
 <template id="header">
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code&family=Fira+Sans:wght@200;400;700&display=swap" rel="stylesheet">
@@ -69,3 +103,9 @@
 </template>
 
 <script id="Component-Each-md" src="./docs/md/Component.Each.md"></script>
+<script id="Component-If-md" src="./docs/md/Component.If.md"></script>
+<script id="Component-Unless-md" src="./docs/md/Component.Unless.md"></script>
+
+<script id="a" src="./docs/md/Component.Unless.md"></script>
+
+<script id="Utils-later-md" src="./docs/md/Utils.later.md"></script>

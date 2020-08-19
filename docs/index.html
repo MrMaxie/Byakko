@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>byakko</title>
+        <link rel="stylesheet" href="assets/syntax-style.css" >
+        <link rel="stylesheet" href="assets/style.css" >
+        <link href="https://fonts.googleapis.com/css2?family=Fira+Code&amp;family=Fira+Sans:wght@200;400;700&amp;display=swap" rel="stylesheet">
+        <script src="assets/wave.js"></script>
+    </head>
+    <body>
+        <main>
+            <canvas id="wave"></canvas>
+            <img src="assets/logon.png" alt="byakko" />
+        </main>
+        <aside>
+            <div class="logo">
+                <img src="assets/logon.png" alt="byakko" />
+            </div>
+
+            <div class="list">
+                <a href="#wave">
+                    <badge type="e"></badge> ~ <span>Welcome</span>
+                </a>
+                <div class="header"><span>API</span></div>
+                
+                    <a href="#asController">
+                        <badge type="d"></badge> ~ <span>asController</span>
+                    </a>
+                
+                    <a href="#Each">
+                        <badge type="c"></badge> ~ <span>Each</span>
+                    </a>
+                
+                    <a href="#If">
+                        <badge type="c"></badge> ~ <span>If</span>
+                    </a>
+                
+                    <a href="#later">
+                        <badge type="f"></badge> ~ <span>later</span>
+                    </a>
+                
+                    <a href="#Unless">
+                        <badge type="c"></badge> ~ <span>Unless</span>
+                    </a>
+                
+            </div>
+        </aside>
+        <div class="content">
+            
+                <h1 id="asController">
+                    <a href="#asController">#</a>
+                    asController
+                </h1>
+                
+            
+                <h1 id="Each">
+                    <a href="#Each">#</a>
+                    Each
+                </h1>
+                <p>Component that allows you to render iterable variable. Works the best with <a href="#later">later</a> because it's possible to omit all rerendering stack and render only that list elements.</p>
+<p><strong>Props</strong></p>
+<div class="list">
+<div class="list-item">
+    <code>value</code> : <code><a href="#later">Later</a> | any[]</code>
+    <div class="list-tag">
+        <tag type="required" />
+    </div>
+    <div class="list-desc">
+        <p>
+            List of values that will be rendered
+        </p>
+    </div>
+</div>
+<div class="list-item">
+    <code>render</code> : <code>(item: any, index: number) => JSX.Eelement</code>
+    <div class="list-tag">
+        <tag type="required" />
+    </div>
+    <div class="list-desc">
+        <p>
+            Rendering function
+        </p>
+    </div>
+</div>
+</div>
+<p><strong>Example #1</strong> — <i>raw usage</i></p>
+<pre><code class="language-tsx">type Item = { id: number; name: string; };
+
+const renderItem = (item: Item, index: number) =&gt; (
+    &lt;div key={item.id}&gt;{item.name} at {index} position&lt;/div&gt;
+);
+
+const ExampleComponent = (props: { list: Item[] }) =&gt; (
+    &lt;Each value={props.list} render={renderItem} /&gt;
+);
+
+// ExampleComponent need to be rerendered to rerender list
+</code></pre>
+<p>Example #2 - <a href="#later">later</a> usage</p>
+<pre><code class="language-tsx">type Item = { id: number; name: string; };
+
+// Create store holding that value
+class Store {
+    @observable // Mobx @observable decorator
+    list: Item[] = [];
+}
+const store = new Store();
+
+const renderItem = (item: Item, index: number) =&gt; (
+    &lt;div key={item.id}&gt;{item.name} at {index} position&lt;/div&gt;
+);
+
+const ExampleComponent = () =&gt; (
+    &lt;Each value={later(store, 'list')} render={renderItem} /&gt;
+);
+
+// ExampleComponent will be rendered once
+</code></pre>
+
+            
+                <h1 id="If">
+                    <a href="#If">#</a>
+                    If
+                </h1>
+                <p>Component that allows you to render block conditionally. Works the best with <a href="#later">later</a> because it's possible to omit all rerendering stack and render only that block relating on pointed value.</p>
+<p>Block inside will be rendered only if given value (or pointed value by <a href="#later">later</a>) will be <a href="https://developer.mozilla.org/en-US/docs/Glossary/Truthy"><strong>truthy</strong></a>.</p>
+<p><strong>Props</strong></p>
+<div class="list">
+<div class="list-item">
+    <code>value</code> : <code><a href="#later">Later</a> | any</code>
+    <div class="list-tag">
+        <tag type="required" />
+    </div>
+    <div class="list-desc">
+        <p>
+            Condition value
+        </p>
+    </div>
+</div>
+<div class="list-item">
+    <code>children</code> : <code>JSX.Element</code>
+    <div class="list-tag">
+        <tag type="default"><code>undefined</code></tag>
+    </div>
+    <div class="list-desc">
+        <p>
+            Rendered content
+        </p>
+    </div>
+</div>
+</div>
+<p><strong>Example #1</strong> — <i>raw usage</i></p>
+<pre><code class="language-tsx">const ExampleComponent = (props: { showMessage: boolean }) =&gt; (
+    &lt;If value={props.showMessage}&gt;
+        Hello there
+    &lt;/If&gt;
+);
+
+// ExampleComponent need to be rerendered to rerender new state of &lt;If/&gt; block
+</code></pre>
+<p>Example #2 - <a href="#later">later</a> usage</p>
+<pre><code class="language-tsx">// Create store holding that value
+class Store {
+    @observable // Mobx @observable decorator
+    showMessage = false;
+}
+const store = new Store();
+
+const ExampleComponent = () =&gt; (
+    &lt;If value={later(store, 'showMessage')}&gt;
+        Hello there
+    &lt;/If&gt;
+);
+
+// ExampleComponent will be rendered once, &lt;If/&gt; will be always synced with store
+</code></pre>
+
+            
+                <h1 id="later">
+                    <a href="#later">#</a>
+                    later
+                </h1>
+                <p>Function that allows you to pack pointed value into recognizable box. Pointed value will be getted only at request, so any <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy">Proxy getters</a> will be not fired before real usage. If such value will be getted in any kind of <a href="https://mobx.js.org/best/react.html">Mobx' observer context</a>, then you can to track such value with possibility to attach it as prop or argument for deeper usage.</p>
+<p><strong>Props</strong></p>
+<div class="list">
+<div class="list-item">
+    <code>target</code> : <code>object | any[]</code>
+    <div class="list-tag">
+        <tag type="required" />
+    </div>
+    <div class="list-desc">
+        <p>
+            Owner of observable value
+        </p>
+    </div>
+</div>
+<div class="list-item">
+    <code>key</code> : <code>string | number</code>
+    <div class="list-tag">
+        <tag type="required" />
+    </div>
+    <div class="list-desc">
+        <p>
+            Name of property inside of target value
+        </p>
+    </div>
+</div>
+</div>
+<strong>Returns</strong>
+<div class="list">
+<div class="list-item">
+    <code>{ get: () => any }</code>
+    <div class="list-desc">
+        <p>
+            Object with getter of pointed value
+        </p>
+    </div>
+</div>
+</div>
+<p><strong>Example #1</strong> — <i>raw usage</i></p>
+<pre><code class="language-typescript">class Store {
+    @observable
+    value = 'test?';
+}
+const store = new Store();
+
+const value = later(store, 'value');
+
+value.get(); // 'test?'
+
+store.value = 'test!';
+
+value.get(); // 'test!'
+</code></pre>
+<p><strong>Example #2</strong> — <i>deep anonymous usage</i></p>
+<pre><code class="language-typescript">const logValueOnChange = (value: Later&lt;string&gt;) =&gt; {
+    // value is SOME later value that returns string
+    autorun(() =&gt; {
+        console.log(value.get());
+    });
+};
+
+class Store {
+    @observable
+    value = 'test?';
+}
+const store = new Store();
+logValueOnChange(later(store, 'value')); // prints 'test?'
+store.value = 'test!'; // prints 'test!'
+</code></pre>
+
+            
+                <h1 id="Unless">
+                    <a href="#Unless">#</a>
+                    Unless
+                </h1>
+                <p>Component that has opposite effect than <a href="#If">If</a> component.</p>
+<p><strong>Props</strong></p>
+<div class="list">
+<div class="list-item">
+    <code>value</code> : <code><a href="#later">Later</a> | any</code>
+    <div class="list-tag">
+        <tag type="required" />
+    </div>
+    <div class="list-desc">
+        <p>
+            Condition value
+        </p>
+    </div>
+</div>
+<div class="list-item">
+    <code>children</code> : <code>JSX.Element</code>
+    <div class="list-tag">
+        <tag type="default"><code>undefined</code></tag>
+    </div>
+    <div class="list-desc">
+        <p>
+            Rendered content
+        </p>
+    </div>
+</div>
+</div>
+
+            
+        </div>
+    </body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.21.0/prism.min.js" integrity="sha512-WkVkkoB31AoI9DAk6SEEEyacH9etQXKUov4JRRuM1Y681VsTq7jYgrRw06cbP6Io7kPsKx+tLFpH/HXZSZ2YEQ==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.21.0/components/prism-typescript.min.js" integrity="sha512-5KnWNKu6jz8OE4nIBndz3PZ4O3RGqcPNcsyEFZkx3F5N8liSwc3bCe4qPOa/a3+e4CxVl0izHMXeZ0Z4yk7LTA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.21.0/components/prism-jsx.min.js" integrity="sha512-QORDihY3o14OZOxXmZxNbdPo4XkiD98/Wt/D8PQG5va4gLb63ZnCanJORVfpzetcJX/Dz4TTFT/I3oRe8O1/Sw==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.21.0/components/prism-tsx.min.js" integrity="sha512-eDMuXl7Gh0FNL+G7rz0Gqiv9+sbuynK/TnKvrT0TU7nyfkfsO0MR2EERxdCxT7dkOHKlQAmS5CKv+p4XDZcKNQ==" crossorigin="anonymous"></script>
+<body>

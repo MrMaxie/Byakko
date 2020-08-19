@@ -27,13 +27,17 @@
     "babel-plugin-transform-react-jsx": "6.24.1",
     "bunny-the-bundler": "1.0.1",
     "commonmark": "0.29.1",
+    "ejs": "3.1.5",
     "fuse-box": "3.7.1",
+    "lodash.sortby": "4.7.0",
     "mobx": "5.15.5",
     "mobx-react": "6.2.5",
     "preact": "10.4.7",
+    "static-server": "2.2.1",
     "terser": "5.0.0",
     "typescript": "3.9.7",
-    "uglify-js": "3.10.1"
+    "uglify-js": "3.10.1",
+    "yaml": "1.10.0"
   },
   "engines": {
     "node": ">=10.0.0"
