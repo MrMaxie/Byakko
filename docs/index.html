@@ -3,44 +3,80 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>byakko</title>
+        <title>Byakko</title>
         <link rel="stylesheet" href="assets/syntax-style.css" >
         <link rel="stylesheet" href="assets/style.css" >
         <link href="https://fonts.googleapis.com/css2?family=Fira+Code&amp;family=Fira+Sans:wght@200;400;700&amp;display=swap" rel="stylesheet">
         <script src="assets/wave.js"></script>
     </head>
     <body>
-        <main>
+        <main id="welcome">
             <canvas id="wave"></canvas>
-            <img src="assets/logon.png" alt="byakko" />
+            <img src="assets/logo-text.png" alt="byakko" />
         </main>
         <aside>
             <div class="logo">
-                <img src="assets/logon.png" alt="byakko" />
+                <img src="assets/logo-text.png" alt="byakko" />
             </div>
 
             <div class="list">
-                <a href="#wave">
+                <a href="#welcome">
                     <badge type="e"></badge> ~ <span>Welcome</span>
                 </a>
+                <div class="header"><span>Docs</span></div>
+                
+                    
+                    <a href="#Get-Started">
+                        <badge type=" "></badge> ~ <span>Get Started</span>
+                    </a>
+                
+                    
+                    <a href="#Installation">
+                        <badge type=" "></badge> ~ <span>Installation</span>
+                    </a>
+                
+                    
+                    <a href="#Concept">
+                        <badge type=" "></badge> ~ <span>Concept</span>
+                    </a>
+                
+                    
+                    
+                    
+                    
+                    
+                    
                 <div class="header"><span>API</span></div>
                 
+                    
+                    
+                    
+                    
+                    <a href="#asAction">
+                        <badge type="d"></badge> ~ <span>asAction</span>
+                    </a>
+                
+                    
                     <a href="#asController">
                         <badge type="d"></badge> ~ <span>asController</span>
                     </a>
                 
+                    
                     <a href="#Each">
                         <badge type="c"></badge> ~ <span>Each</span>
                     </a>
                 
+                    
                     <a href="#If">
                         <badge type="c"></badge> ~ <span>If</span>
                     </a>
                 
+                    
                     <a href="#later">
                         <badge type="f"></badge> ~ <span>later</span>
                     </a>
                 
+                    
                     <a href="#Unless">
                         <badge type="c"></badge> ~ <span>Unless</span>
                     </a>
@@ -49,11 +85,149 @@
         </aside>
         <div class="content">
             
+                <h1 id="Get-Started">
+                    <a href="#Get-Started">#</a>
+                    Get Started
+                </h1>
+                <center>
+    <img src="assets/d1.png" alt="diagram" />
+</center>
+<p><strong>Byakko</strong> is framework that allows you to create more controllable flow for <a href="https://en.wikipedia.org/wiki/Single-page_application">SPA</a> using built-in tools and required external libraries:</p>
+<ol>
+<li>
+<p><strong><a href="https://preactjs.com/">Preact</a></strong> - As first point you need to use some library that is compatible with React API. You don't have to use React itself. Actually Preact is much much faster.</p>
+</li>
+<li>
+<p><strong><a href="https://www.typescriptlang.org/">TypeScript</a></strong> - TypeScript allows us to create our code more readable and safe. It's required because of e.g decorators.</p>
+</li>
+<li>
+<p><strong><a href="https://mobx.js.org/">MobX</a></strong> - MobX is powerful tool to create seamless storages/models in this frontend world. MobX itself performance aside, have single big problem. Programmers can mess up all flow by accident and create hell of loops. Byakko will help you to keep clean data flow.</p>
+</li>
+</ol>
+<p>Byakko's second greatest advantage is the concept that mix multiple needed programming design patterns in cleanest possible way.</p>
+
+            
+                <h1 id="Installation">
+                    <a href="#Installation">#</a>
+                    Installation
+                </h1>
+                <p>We need of course to install required libraries and Byakko itself:</p>
+<pre><code class="language-bash">npm install --save-exact byakko typescript mobx preact mobx-react
+</code></pre>
+<p>Also we need to set-up some compilation flow. You can to use TypeScript compilation ifself or some packing library like <a href="https://fuse-box.org/">Fuse-Box</a>.</p>
+<p>Thats all!</p>
+
+            
+                <h1 id="Concept">
+                    <a href="#Concept">#</a>
+                    Concept
+                </h1>
+                <p>We need of course to install required libraries and Byakko itself:</p>
+<pre><code class="language-bash">npm install --save-exact byakko typescript mobx preact mobx-react
+</code></pre>
+<p>Also we need to set-up some compilation flow. You can to use TypeScript compilation ifself or some packing library like <a href="https://fuse-box.org/">Fuse-Box</a>.</p>
+<p>Thats all!</p>
+
+            
+                <h1 id="asAction">
+                    <a href="#asAction">#</a>
+                    asAction
+                </h1>
+                <p>Decorator that allows you to set-up method as action. Without that method will never be ran as action. The class of this method must be a valid controller.</p>
+<p><strong>Arguments</strong></p>
+<div class="list">
+<div class="list-item">
+    <code>name</code> : <code>string</code>
+    <div class="list-tag">
+        <tag type="required" />
+    </div>
+    <div class="list-desc">
+        <p>
+            Descriptive short name of action
+        </p>
+    </div>
+</div>
+<div class="list-item">
+    <code>path</code> : <code>string | string[]</code>
+    <div class="list-tag">
+        <tag type="default"><code>'/'</code></tag>
+    </div>
+    <div class="list-desc">
+        <p>
+            Path or paths where action will be mounted
+        </p>
+        <p>
+            All actions inside will be mounted inside of that path. So if controller is mounted under path <code>/user</code>, inside action will be mounted under <code>/login</code> then, as a result, the action will be registered under the path <code>/user/login</code>.
+        </p>
+    </div>
+</div>
+</div>
+<p><strong>Example</strong> — <i>example controller</i></p>
+<pre><code class="language-tsx">@asController({
+    name: 'User',
+    path: ['/', '/user'],
+})
+class User {
+    @asAction({
+        name: 'Login',
+        path: '/login',
+    })
+    loginAction() {
+
+    }
+}
+</code></pre>
+
+            
                 <h1 id="asController">
                     <a href="#asController">#</a>
                     asController
                 </h1>
-                
+                <p>Decorator that allows you to set-up class as controller. Without that class will be ignored at controllers registration process.</p>
+<p><strong>Arguments</strong></p>
+<div class="list">
+<div class="list-item">
+    <code>name</code> : <code>string</code>
+    <div class="list-tag">
+        <tag type="required" />
+    </div>
+    <div class="list-desc">
+        <p>
+            Descriptive short name of controller
+        </p>
+    </div>
+</div>
+<div class="list-item">
+    <code>path</code> : <code>string | string[]</code>
+    <div class="list-tag">
+        <tag type="default"><code>'/'</code></tag>
+    </div>
+    <div class="list-desc">
+        <p>
+            Path or paths where controller will be mounted
+        </p>
+        <p>
+            All actions inside will be mounted inside of that path. So if controller is mounted under path <code>/user</code>, inside action will be mounted under <code>/login</code> then, as a result, the action will be registered under the path <code>/user/login</code>.
+        </p>
+    </div>
+</div>
+</div>
+<p><strong>Example</strong> — <i>example controller</i></p>
+<pre><code class="language-tsx">@asController({
+    name: 'User',
+    path: ['/', '/user'],
+})
+class User {
+    // Actions here, e.g:
+    // - /login
+    // - /register
+    // - /profile
+    // - /logout
+    // etc
+    // so /login and /user/login will casue running above action
+}
+</code></pre>
+
             
                 <h1 id="Each">
                     <a href="#Each">#</a>
@@ -74,7 +248,7 @@
     </div>
 </div>
 <div class="list-item">
-    <code>render</code> : <code>(item: any, index: number) => JSX.Eelement</code>
+    <code>render</code> : <code class="language-tsx">(item: any, index: number) => JSX.Element</code>
     <div class="list-tag">
         <tag type="required" />
     </div>

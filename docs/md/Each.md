@@ -19,7 +19,7 @@ Component that allows you to render iterable variable. Works the best with [late
     </div>
 </div>
 <div class="list-item">
-    <code>render</code> : <code>(item: any, index: number) => JSX.Eelement</code>
+    <code>render</code> : <code class="language-tsx">(item: any, index: number) => JSX.Element</code>
     <div class="list-tag">
         <tag type="required" />
     </div>

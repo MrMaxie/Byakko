@@ -3,38 +3,46 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>byakko</title>
+        <title>Byakko</title>
         <link rel="stylesheet" href="assets/syntax-style.css" >
         <link rel="stylesheet" href="assets/style.css" >
         <link href="https://fonts.googleapis.com/css2?family=Fira+Code&amp;family=Fira+Sans:wght@200;400;700&amp;display=swap" rel="stylesheet">
         <script src="assets/wave.js"></script>
     </head>
     <body>
-        <main>
+        <main id="welcome">
             <canvas id="wave"></canvas>
-            <img src="assets/logon.png" alt="byakko" />
+            <img src="assets/logo-text.png" alt="byakko" />
         </main>
         <aside>
             <div class="logo">
-                <img src="assets/logon.png" alt="byakko" />
+                <img src="assets/logo-text.png" alt="byakko" />
             </div>
 
             <div class="list">
-                <a href="#wave">
+                <a href="#welcome">
                     <badge type="e"></badge> ~ <span>Welcome</span>
                 </a>
+                <div class="header"><span>Docs</span></div>
+                <% for (const x of items) { %>
+                    <% if (x.type) continue; %>
+                    <a href="#<%= x.hash %>">
+                        <badge type="<%= x.typeChar %>"></badge> ~ <span><%= x.name %></span>
+                    </a>
+                <% } %>
                 <div class="header"><span>API</span></div>
                 <% for (const x of items) { %>
-                    <a href="#<%= x.name %>">
-                        <badge type="<%= x.type[0].toLowerCase() %>"></badge> ~ <span><%= x.name %></span>
+                    <% if (!x.type) continue; %>
+                    <a href="#<%= x.hash %>">
+                        <badge type="<%= x.typeChar %>"></badge> ~ <span><%= x.name %></span>
                     </a>
                 <% } %>
             </div>
         </aside>
         <div class="content">
             <% for (const x of items) { %>
-                <h1 id="<%= x.name %>">
-                    <a href="#<%= x.name %>">#</a>
+                <h1 id="<%= x.hash %>">
+                    <a href="#<%= x.hash %>">#</a>
                     <%= x.name %>
                 </h1>
                 <%- x.body %>

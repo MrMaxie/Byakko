@@ -35,7 +35,7 @@ main {
 
 main:before {
     content: '';
-    background-image: url(./loogbbb.png);
+    background-image: url(./logo-wolf.png);
     background-position: center center;
     background-repeat: no-repeat;
     background-size: 130vh;
@@ -121,6 +121,10 @@ a {
 
 .content {
     padding: 0 50px 25px;
+}
+
+.content img {
+    margin: 0 auto;
 }
 
 body {

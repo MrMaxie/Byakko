@@ -105,6 +105,9 @@ task('docs', async () => {
         x.body = (new HtmlRenderer()).render((new Parser()).parse(x.body || ''));
         x.order = x.order || 999;
         x.orderName = (x.name || '').toLowerCase();
+        x.type = x.type || '';
+        x.typeChar = (x.type || ' ')[0].toLowerCase();
+        x.hash = x.name.replace('.', '').replace(/\d/, '').trim().replace(' ', '-');
     });
     const sortedEntries = _sortBy(entries, ['order', 'orderName']);
 

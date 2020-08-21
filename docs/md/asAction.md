@@ -1,9 +1,9 @@
 ---
 type: Decorator
-name: asController
+name: asAction
 ---
 
-Decorator that allows you to set-up class as controller. Without that class will be ignored at controllers registration process.
+Decorator that allows you to set-up method as action. Without that method will never be ran as action. The class of this method must be a valid controller.
 
 <strong>Arguments</strong>
 <div class="list">
@@ -14,7 +14,7 @@ Decorator that allows you to set-up class as controller. Without that class will
     </div>
     <div class="list-desc">
         <p>
-            Descriptive short name of controller
+            Descriptive short name of action
         </p>
     </div>
 </div>
@@ -25,7 +25,7 @@ Decorator that allows you to set-up class as controller. Without that class will
     </div>
     <div class="list-desc">
         <p>
-            Path or paths where controller will be mounted
+            Path or paths where action will be mounted
         </p>
         <p>
             All actions inside will be mounted inside of that path. So if controller is mounted under path <code>/user</code>, inside action will be mounted under <code>/login</code> then, as a result, the action will be registered under the path <code>/user/login</code>.
@@ -43,12 +43,12 @@ Decorator that allows you to set-up class as controller. Without that class will
     path: ['/', '/user'],
 })
 class User {
-    // Actions here, e.g:
-    // - /login
-    // - /register
-    // - /profile
-    // - /logout
-    // etc
-    // so /login and /user/login will casue running above action
+    @asAction({
+        name: 'Login',
+        path: '/login',
+    })
+    loginAction() {
+
+    }
 }
 ```
