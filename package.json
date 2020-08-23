@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/MrMaxie/Byakko#readme",
   "devDependencies": {
+    "@types/crossroads": "0.0.30",
     "@types/node": "14.0.27",
     "@types/react": "16.9.46",
     "babel-core": "6.26.3",
@@ -47,5 +48,8 @@
     "react": ">=16.0.0",
     "preact": ">=10.0.0",
     "mobx-react": ">=6.0.0"
+  },
+  "dependencies": {
+    "crossroads": "0.12.2"
   }
 }

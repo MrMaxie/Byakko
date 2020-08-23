@@ -1,19 +1,24 @@
-import { computed } from  'mobx';
+import { action, computed } from  'mobx';
 
-export class Later<T extends ([] | {}), K extends keyof T, Res = T[K]> {
-    get: () => Res;
+export class Later<R> {
+    get: () => R;
+
+    set: (x: R) => void;
 
     constructor(
-        target: T,
-        key: K,
+        target: {} | [],
+        key: string | number | symbol,
     ) {
         const c = computed(() => target[key]);
-        this.get = () => c.get() as unknown as Res;
+        this.get = () => c.get() as unknown as R;
+        this.set = action((x: R) => {
+            target[key] = x;
+        });
     }
 }
 
 export const later = <T extends ([] | {}), K extends keyof T>(target: T, key: K): {
     get: () => T[K];
-} => new Later(target, key);
+} => new Later<T[K]>(target, key);
 
 export const isLater = (x: any): x is Later<any, any, any> => x instanceof Later;

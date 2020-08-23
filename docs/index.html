@@ -122,11 +122,16 @@
                     <a href="#Concept">#</a>
                     Concept
                 </h1>
-                <p>We need of course to install required libraries and Byakko itself:</p>
-<pre><code class="language-bash">npm install --save-exact byakko typescript mobx preact mobx-react
-</code></pre>
-<p>Also we need to set-up some compilation flow. You can to use TypeScript compilation ifself or some packing library like <a href="https://fuse-box.org/">Fuse-Box</a>.</p>
-<p>Thats all!</p>
+                <p>One of biggest and the most important thing is concept of flow. Generally in Vanilla JS, (P)react, MobX etc. enviroments you don't have any predefinited structure. It's awesome when you can create own structure by basing on your needs. But, to be honest, in most such dynamic created by multiple people you can go crazy looking where what is. MVVM (Model View View-Model) magnifies this effect by mixing two worlds in a boundless way - the world of the interface and the world of data.</p>
+<p>So Byakko splits all things into small pieces to keep everything on correct place.</p>
+<h2>1. Core</h2>
+<p><a href="#Core">Core</a> class allows you to set-up your own three of registered parts. It's just place where most of logic meet. Core itself don't know anything about application itself. Main role of core is queue services into steps, with hooks etc. <a href="#Core">Read more...</a></p>
+<h2>2. Services</h2>
+<p>Services are utility singletons that can you provide some superpower into application. There are also few preregistered services:</p>
+<ul>
+<li>Logger - Allows you to mark variables, tasks etc. to log them out, or just log some text in <a href="#Extension">powerful Byakko's extension</a></li>
+<li>Router - Router itself will recognize current page and navigate to correct controller and action. But router also allows you to navigate.</li>
+</ul>
 
             
                 <h1 id="asAction">
