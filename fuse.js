@@ -1,7 +1,13 @@
 const { exec: spawn } = require('child_process');
 const fs = require('fs');
 const { join } = require('path');
-const { FuseBox, BabelPlugin, WebIndexPlugin } = require('fuse-box');
+const {
+    FuseBox,
+    BabelPlugin,
+    WebIndexPlugin,
+    SassPlugin,
+    CSSPlugin,
+} = require('fuse-box');
 const { task, watch, exec } = require('fuse-box/sparky');
 const ejs = require('ejs');
 const glob = require('glob');
@@ -70,7 +76,51 @@ const initFuseTest = () => {
     };
 };
 
-task('build', () => {
+const initFuseExtension = () => {
+    const fuse = new FuseBox({
+        homeDir: 'extension/src',
+        target: 'browser@es6',
+        output: 'extension/dist/app/$name.js',
+        useTypescriptCompiler: true,
+        experimentalFeatures: true,
+        alias: {
+            react: 'preact/compat',
+            'react-dom': 'preact/compat',
+        },
+        plugins: [
+            WebIndexPlugin({
+                title: 'Awesome Project',
+                template: 'extension/dist/panel.html',
+            }),
+            [
+                SassPlugin({
+                    outputStyle: 'compressed',
+                }),
+                CSSPlugin({
+                    group: 'index.css',
+                    outFile: `extension/dist/app/index.css`,
+                }),
+            ],
+            BabelPlugin({
+                config: {
+                    plugins: [['transform-react-jsx', { pragma: 'React.h' }]],
+                },
+            }),
+        ],
+    });
+
+    return {
+        fuse,
+        vendor: fuse.bundle('vendor').instructions('~ index.tsx'),
+        app: fuse.bundle('app').instructions('> index.tsx'),
+    };
+};
+
+// ======================================================
+// Tasks
+// ======================================================
+
+task('module:build', () => {
     return new Promise(res => {
         spawn('npm run build', {
             cwd: __dirname,
@@ -80,13 +130,13 @@ task('build', () => {
     });
 });
 
-task('build:watch', () => {
+task('module:watch', () => {
     return watch('src/**/**.**', {
         base: __dirname,
-    }, () => exec('build'));
+    }, () => exec('module:build'));
 });
 
-task('docs', async () => {
+task('docs:build', async () => {
     const mdsPaths = await getMdFiles();
     const mds = await Promise.all(mdsPaths.map(x => join(__dirname, 'docs', 'md', x)).map(readFile));
     const entries = mds.map(x => {
@@ -126,10 +176,22 @@ task('docs:watch', () => {
 
     return watch('docs/**/**.{md,ejs}', {
         base: __dirname,
-    }, () => exec('docs'));
+    }, () => exec('docs:build'));
 });
 
-task('test', ['build:watch', 'docs:watch'], () => {
+task('extension:build', () => initFuseExtension().fuse.run());
+
+task('extension:watch', () => {
+    const { vendor, app } = initFuseExtension();
+
+    vendor.watch();
+    app.watch();
+
+    return app.fuse.run();
+
+});
+
+task('test:watch', () => {
     const { vendor, app } = initFuseTest();
 
     app.fuse.dev({
@@ -141,3 +203,7 @@ task('test', ['build:watch', 'docs:watch'], () => {
     app.hmr().watch();
     return app.fuse.run();
 });
+
+task('build', ['module:build', 'docs:build', 'extension:build']);
+
+task('dev', ['test:watch', 'module:watch', 'docs:watch', 'extension:watch']);

@@ -30,7 +30,7 @@ main {
     align-items: center;
     position: relative;
     background-color: #0a090c;
-    background: linear-gradient(0deg, rgb(34 12 41) 0%, rgb(32 29 33) 100%);
+    background: linear-gradient(0deg, #ff00cc 0%, #333399 100%);
 }
 
 main:before {
@@ -85,7 +85,6 @@ main:after {
 main img {
     position: absolute;
     z-index: 50;
-    height: 10rem;
 }
 
 aside .logo {
@@ -115,10 +114,6 @@ a {
     color: #479fff;
 }
 
-.content a {
-    text-shadow: 0 0 5px #479fff;
-}
-
 .content {
     padding: 0 50px 25px;
 }
@@ -135,7 +130,7 @@ body {
     margin-left: 0;
     padding-left: 350px;
     scroll-behavior: smooth;
-    background-color: #131019;
+    background-color: #111111;
     color: white;
 }
 
@@ -146,12 +141,29 @@ aside {
     bottom: 0;
     height: 100vh;
     width: 350px;
-    background-color: #131019;
+    background-color: #111111;
     color: #aaafbd;
     z-index: 500;
     display: flex;
     flex-direction: column;
-    box-shadow: 0 0 15px 5px rgba(0, 0, 0, 0.3);
+    border-right: 1px solid #ff00cc;
+    animation: 5s aside-bg infinite ease-in-out alternate;
+}
+
+aside .list {
+    padding-top: 10px;
+}
+
+@keyframes aside-bg {
+    0% {
+        border-right-color: #ff00cc;
+    }
+    50% {
+        border-right-color: #333399;
+    }
+    100% {
+        border-right-color: #ff00cc;
+    }
 }
 
 aside a {
@@ -161,6 +173,7 @@ aside a {
     box-sizing: border-box;
     transition: .3s background-color;
     color: #747577;
+    background-color: transparent;
     font-family: 'Fira Code', monospace;
 }
 
@@ -170,7 +183,7 @@ aside a > span {
 }
 
 aside a:hover {
-    background-color: rgba(0, 0, 0, .5);
+    background-color: #00000075;
     cursor: pointer;
 }
 
@@ -200,6 +213,7 @@ aside .header:after {
 }
 
 h1 {
+    padding-top: 20px;
     position: relative;
 }
 
@@ -234,7 +248,7 @@ code {
 }
 
 .content > p {
-    color: #ccc;
+    color: white;
 }
 
 .list-desc p {

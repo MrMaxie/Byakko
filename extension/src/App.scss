@@ -1,0 +1,33 @@
+@import '_vars';
+
+#app {
+    color: white;
+    background-color: $bg-1-color;
+    height: 100%;
+    font-family: 'Fira Code', consolas, monospace;
+    user-select: none;
+}
+
+.over-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    flex-direction: column;
+    cursor: pointer;
+
+    > .try-again {
+        font-size: .8rem;
+        color: $link-color;
+    }
+}
+
+.app {
+    width: 100%;
+    height: 100%;
+}
