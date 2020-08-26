@@ -1,6 +1,6 @@
 import React from 'react';
 import { observer } from 'mobx-react';
-import { Later } from '../utils/later';
+import { Later, isLater } from '../utils/later';
 
 const SimpleEach = <
     Item extends any,
@@ -17,7 +17,7 @@ const LaterEach = observer(<
     Item extends any,
     ValidList extends Item[],
 >(p: {
-    value: Later<any, any, ValidList>;
+    value: Later<ValidList>;
     render: (item: Item, index: number) => JSX.Element;
 }) => {
     const r = (p.value.get() || []).map((item, index) => p.render(item, index))
@@ -28,8 +28,8 @@ export const Each = <
     Item extends any,
     ValidList extends Item[],
 >(p: {
-    value: Later<any, any, ValidList> | ValidList;
+    value: Later<ValidList> | ValidList;
     render: (item: Item, index: number) => JSX.Element;
-}) => p.value instanceof Later
+}) => isLater(p.value)
     ? <LaterEach value={p.value} render={p.render} />
     : <SimpleEach value={p.value} render={p.render} />;

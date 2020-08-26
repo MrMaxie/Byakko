@@ -1,6 +1,6 @@
 import React from 'preact';
 import { observable, action } from 'mobx';
-import { Core, If, Each, later } from 'byakko';
+import { Core, If, Each, later, isLater, task } from 'byakko';
 
 const core = new Core();
 core.dev();
@@ -12,11 +12,31 @@ type Item = {
     isDone: boolean;
 };
 
+const obj = {
+    x: 5,
+};
+
+const x = later(obj, 'x');
+
+console.log(x);
+
+
 class Store {
     i = 0;
 
     @observable
     list: Item[] = [];
+
+    @task('Login', {
+        silent: true,
+    })
+    login() {
+        return new Promise((res, rej) => {
+            setTimeout(() => {
+                rej();
+            }, 1000);
+        });
+    }
 
     add = () => {
         const id = ++this.i;
@@ -75,6 +95,7 @@ export default class App extends React.Component {
     render() {
         return (
             <div>
+                <button onClick={store.login}>Login</button>
                 <h1>Hello there</h1>
                 <If value={later(this, 'show')}>
                     <h1>Prawda</h1>

@@ -20,6 +20,13 @@
     background: #868686;
 }
 
+:root {
+    --accent: #89023e;
+    --accent-d1: #4d0425;
+    --accent-d2: #240212;
+    --accent-d3: #0c0006;
+}
+
 main {
     height: 100vh;
     width: 100%;
@@ -29,8 +36,25 @@ main {
     justify-content: center;
     align-items: center;
     position: relative;
-    background-color: #0a090c;
-    background: linear-gradient(0deg, #ff00cc 0%, #333399 100%);
+    background: linear-gradient(0deg, var(--accent) 0%, var(--accent-d1) 100%);
+}
+
+.content svg a {
+    opacity: .6;
+    transition: .3s opacity;
+}
+
+.content svg a:hover {
+    opacity: 1;
+}
+
+.content svg {
+    width: 750px;
+    max-width: 85vw;
+    font-family: 'Fira Code', consolas, monospace;
+    stroke-width: 1px;
+    font-size: 1.1rem;
+    color: white;
 }
 
 main:before {
@@ -93,10 +117,9 @@ aside .logo {
     align-items: center;
     padding: 10px;
     flex-direction: column;
-    color: white;
     font-size: 1.2rem;
     font-weight: 200;
-    border-bottom: 1px dashed #5d4365;
+    border-bottom: 1px dashed var(--accent);
 }
 
 aside .logo img {
@@ -124,13 +147,13 @@ a {
 
 body {
     font-family: 'Fira Sans', sans-serif;
-    font-size: 16px;
+    font-size: 14px;
     padding: 0;
     margin: 0;
     margin-left: 0;
     padding-left: 350px;
     scroll-behavior: smooth;
-    background-color: #111111;
+    background-color: var(--accent-d3);
     color: white;
 }
 
@@ -141,29 +164,16 @@ aside {
     bottom: 0;
     height: 100vh;
     width: 350px;
-    background-color: #111111;
+    background-color: var(--accent-d2);
     color: #aaafbd;
     z-index: 500;
     display: flex;
     flex-direction: column;
-    border-right: 1px solid #ff00cc;
-    animation: 5s aside-bg infinite ease-in-out alternate;
+    border-right: 1px solid transparent;
 }
 
 aside .list {
     padding-top: 10px;
-}
-
-@keyframes aside-bg {
-    0% {
-        border-right-color: #ff00cc;
-    }
-    50% {
-        border-right-color: #333399;
-    }
-    100% {
-        border-right-color: #ff00cc;
-    }
 }
 
 aside a {
@@ -178,12 +188,12 @@ aside a {
 }
 
 aside a > span {
-    color: #aaafbd;
+    color: rgba(255, 255, 255, .35);
     transition: .3s color;
 }
 
 aside a:hover {
-    background-color: #00000075;
+    background-color: var(--accent-d3);
     cursor: pointer;
 }
 
@@ -197,13 +207,14 @@ aside .header {
     display: flex;
     flex-direction: row;
     align-items: center;
+    color: var(--accent);
 }
 
 aside .header:after,
 aside .header:before {
     content: '';
     height: 1px;
-    border-bottom: 1px dashed #5d4365;
+    border-bottom: 1px dashed currentColor;
     width: 20px;
     margin: 0 10px;
 }
@@ -306,7 +317,6 @@ badge {
     text-align: center;
     display: inline-block;
     width: 20px;
-    font-weight: 200;
     color: white;
 }
 

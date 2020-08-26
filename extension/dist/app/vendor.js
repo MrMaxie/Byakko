@@ -1,7 +1,5 @@
 (function(FuseBox){FuseBox.$fuse$=FuseBox;
 FuseBox.target = "browser";
-// allowSyntheticDefaultImports
-FuseBox.sdep = true;
 FuseBox.pkg("default", {}, function(___scope___){
 ___scope___.file("index.css", function(exports, require, module, __filename, __dirname){
 

@@ -151,14 +151,33 @@ task('docs:build', async () => {
 
         return { ...header, body };
     });
+
+    const svgs = [];
+
     entries.forEach(x => {
         x.body = (new HtmlRenderer()).render((new Parser()).parse(x.body || ''));
+        (x.body.match(/~~([^\s]+\.svg)/gi) || []).forEach(y => {
+            svgs.push({
+                entry: x,
+                from: y,
+                path: y.replace(/~/g, ''),
+            });
+        });
         x.order = x.order || 999;
         x.orderName = (x.name || '').toLowerCase();
         x.type = x.type || '';
         x.typeChar = (x.type || ' ')[0].toLowerCase();
         x.hash = x.name.replace('.', '').replace(/\d/, '').trim().replace(' ', '-');
     });
+
+    await Promise.all(
+        svgs.map(x =>
+            readFile(join(__dirname, 'docs', x.path)).then(c => {
+                x.entry.body = x.entry.body.replace(x.from, c);
+            })
+        )
+    );
+
     const sortedEntries = _sortBy(entries, ['order', 'orderName']);
 
     const res = await ejs.renderFile(join(__dirname, 'docs', 'index.ejs'), { items: sortedEntries });
@@ -174,7 +193,7 @@ task('docs:watch', () => {
 
     server.start();
 
-    return watch('docs/**/**.{md,ejs}', {
+    return watch('docs/**/**.{md,ejs,svg}', {
         base: __dirname,
     }, () => exec('docs:build'));
 });

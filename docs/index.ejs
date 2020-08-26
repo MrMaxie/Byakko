@@ -21,20 +21,20 @@
 
             <div class="list">
                 <a href="#welcome">
-                    <badge type="e"></badge> ~ <span>Welcome</span>
+                    <badge type="e"></badge> <span>Welcome</span>
                 </a>
                 <div class="header"><span>Docs</span></div>
                 <% for (const x of items) { %>
                     <% if (x.type) continue; %>
                     <a href="#<%= x.hash %>">
-                        <badge type="<%= x.typeChar %>"></badge> ~ <span><%= x.name %></span>
+                        <badge type="<%= x.typeChar %>"></badge> <span><%= x.name %></span>
                     </a>
                 <% } %>
                 <div class="header"><span>API</span></div>
                 <% for (const x of items) { %>
                     <% if (!x.type) continue; %>
                     <a href="#<%= x.hash %>">
-                        <badge type="<%= x.typeChar %>"></badge> ~ <span><%= x.name %></span>
+                        <badge type="<%= x.typeChar %>"></badge> <span><%= x.name %></span>
                     </a>
                 <% } %>
             </div>

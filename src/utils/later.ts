@@ -1,24 +1,28 @@
 import { action, computed } from  'mobx';
 
-export class Later<R> {
-    get: () => R;
+class Later<T extends ([] | {}), K extends keyof T> {
+    get: () => T[K];
+    set: (value: T[K]) => void;
 
-    set: (x: R) => void;
+    constructor(target: T, key: K) {
+        const enclosedGetter = computed(() => target[key]);
 
-    constructor(
-        target: {} | [],
-        key: string | number | symbol,
-    ) {
-        const c = computed(() => target[key]);
-        this.get = () => c.get() as unknown as R;
-        this.set = action((x: R) => {
-            target[key] = x;
+        this.get = () => enclosedGetter.get();
+
+        this.set = action((value: T[K]) => {
+            target[key] = value;
         });
     }
 }
 
-export const later = <T extends ([] | {}), K extends keyof T>(target: T, key: K): {
-    get: () => T[K];
-} => new Later<T[K]>(target, key);
+type LaterType<Result extends any> = {
+    get: () => Result;
+    set: (x: Result) => void;
+};
 
-export const isLater = (x: any): x is Later<any, any, any> => x instanceof Later;
+export const later = <T extends ([] | {}), K extends keyof T>(target: T, key: K): Later<T, K> =>
+    new Later(target, key) as LaterType<T[K]>;
+
+export const isLater = (x: any): x is LaterType<any> => x instanceof Later;
+
+export type { LaterType as Later };
