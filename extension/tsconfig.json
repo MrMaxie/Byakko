@@ -1,6 +1,6 @@
 {
     "compilerOptions": {
-        "outDir": "dist",
+        "outDir": "dist/app",
         "sourceMap": true,
         "inlineSources": false,
         "strictNullChecks": true,

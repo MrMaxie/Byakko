@@ -1,40 +1,42 @@
-const connections = {};
-
-chrome.runtime.onMessage.addListener((request, sender) => {
-    if (sender.tab) {
-        const id = sender.tab.id;
-
-        if (id in connections) {
-            connections[id].postMessage(request);
-        }
-    }
-
-    return true;
-});
+const conns = {};
 
 chrome.runtime.onConnect.addListener(port => {
-    port.onMessage.addListener(request => {
-        if (request.name === 'init') {
-            connections[request.tabId] = port;
+    const handler = (msg, sender, res) => {
+        console.log('devt', msg);
 
-            port.onDisconnect.addListener(() => {
-                delete connections[request.tabId];
-            });
-
+        if (msg.name === 'init') {
+            conns[msg.tabId] = port;
+            console.log(`register for ${msg.tabId}`);
             return;
         }
 
-        chrome.tabs.sendMessage(request.tabId, {
-            name: request.name,
-            data: request.data,
-        });
+        chrome.tabs.sendMessage(msg.tabId, msg.data);
+    };
+
+    port.onMessage.addListener(handler);
+
+    port.onDisconnect.addListener(port => {
+        port.onMessage.removeListener(handler);
+
+        for (const tab in conns) {
+            if (conns[tab] === port) {
+                delete conns[tab];
+                return;
+            }
+        }
     });
 });
 
-chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
-    if (tabId in connections && changeInfo.status === 'complete') {
-        connections[tabId].postMessage({
-            name: 'reloaded',
-        });
+chrome.runtime.onMessage.addListener((msg, sender, res) => {
+    console.log('page', msg);
+
+    if (!sender.tab) {
+        return true;
     }
+
+    if (sender.tab.id in conns) {
+        conns[sender.tab.id].postMessage(msg);
+    }
+
+    return true;
 });

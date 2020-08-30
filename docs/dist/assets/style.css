@@ -1,6 +1,37 @@
+:root {
+    --mono-font: 'Fira Code', consolas, monospace;
+    --sans-font: 'Fira Sans', sans-serif;
+
+    --accent: #89023e;
+    --accent-d1: #4d0425;
+    --accent-d2: #240212;
+    --accent-d3: #0c0006;
+
+    --scroll-1: #323238;
+    --scroll-2: #121215;
+    --scroll-track: #58585871;
+    --scroll-thumb: #868686;
+
+    --gradient-from: var(--accent);
+    --gradient-to: var(--accent-d1);
+
+    --text: white;
+    --dim-text: #aaafbd;
+    --border: var(--accent);
+    --anchor-text: #479fff;
+
+    --tag-required: #d83f39;
+    --tag-default: #047d37;
+
+    --badge-controller: #7211b3;
+    --badge-decorator: #4d9936;
+    --badge-function: #2a9ae4;
+    --badge-type: #c41e1e;
+}
+
 * {
     scrollbar-width: thin;
-    scrollbar-color: #323238 #121215;
+    scrollbar-color: var(--scroll-color-1) var(--scroll-color-1);
 }
 
 *::-webkit-scrollbar {
@@ -13,18 +44,16 @@
 }
 
 *::-webkit-scrollbar-track {
-    background: #58585871;
+    background: var(--scroll-track);
 }
 
 *::-webkit-scrollbar-thumb {
-    background: #868686;
+    background: var(--scroll-thumb);
 }
 
-:root {
-    --accent: #89023e;
-    --accent-d1: #4d0425;
-    --accent-d2: #240212;
-    --accent-d3: #0c0006;
+a {
+    text-decoration: none;
+    color: var(--anchor-text);
 }
 
 main {
@@ -36,7 +65,7 @@ main {
     justify-content: center;
     align-items: center;
     position: relative;
-    background: linear-gradient(0deg, var(--accent) 0%, var(--accent-d1) 100%);
+    background: linear-gradient(0deg, var(--gradient-from) 0%, var(--gradient-to) 100%);
 }
 
 .content svg a {
@@ -51,10 +80,10 @@ main {
 .content svg {
     width: 750px;
     max-width: 85vw;
-    font-family: 'Fira Code', consolas, monospace;
+    font-family: var(--mono-font);
     stroke-width: 1px;
     font-size: 1.1rem;
-    color: white;
+    color: var(--text);
 }
 
 main:before {
@@ -78,7 +107,7 @@ main:after {
     bottom: -20rem;
     opacity: .3;
     color: rgba(0, 0, 0, .15);
-    font-family: 'Fira Sans', sans-serif;
+    font-family: var(--sans-font);
     font-size: 50rem;
     text-align: center;
     animation: 3s blink-wave infinite ease-in alternate;
@@ -119,7 +148,7 @@ aside .logo {
     flex-direction: column;
     font-size: 1.2rem;
     font-weight: 200;
-    border-bottom: 1px dashed var(--accent);
+    border-bottom: 1px dashed var(--border);
 }
 
 aside .logo img {
@@ -132,11 +161,6 @@ aside .list {
     overflow-y: scroll;
 }
 
-a {
-    text-decoration: none;
-    color: #479fff;
-}
-
 .content {
     padding: 0 50px 25px;
 }
@@ -146,7 +170,7 @@ a {
 }
 
 body {
-    font-family: 'Fira Sans', sans-serif;
+    font-family: var(--sans-font);
     font-size: 14px;
     padding: 0;
     margin: 0;
@@ -154,7 +178,7 @@ body {
     padding-left: 350px;
     scroll-behavior: smooth;
     background-color: var(--accent-d3);
-    color: white;
+    color: var(--text);
 }
 
 aside {
@@ -165,7 +189,7 @@ aside {
     height: 100vh;
     width: 350px;
     background-color: var(--accent-d2);
-    color: #aaafbd;
+    color: var(--dim-text);
     z-index: 500;
     display: flex;
     flex-direction: column;
@@ -182,14 +206,14 @@ aside a {
     padding: 10px 15px;
     box-sizing: border-box;
     transition: .3s background-color;
-    color: #747577;
+    color: var(--text);
     background-color: transparent;
-    font-family: 'Fira Code', monospace;
+    font-family: var(--mono-font);
 }
 
 aside a > span {
-    color: rgba(255, 255, 255, .35);
-    transition: .3s color;
+    opacity: .35;
+    transition: .3s opacity;
 }
 
 aside a:hover {
@@ -198,7 +222,7 @@ aside a:hover {
 }
 
 aside a:hover > span {
-    color: white;
+    opacity: 1;
 }
 
 aside .header {
@@ -234,12 +258,11 @@ h1 a {
     left: -50px;
     width: 50px;
     text-align: center;
-    color: #d2d2d2;
     font-weight: normal;
 }
 
 code {
-    font-family: 'Fira Code', monospace !important;
+    font-family: var(--mono-font) !important;
 }
 
 .content .list {
@@ -253,13 +276,13 @@ code {
 }
 
 .content .list-desc {
-    border-top: 1px dashed #5d4365;
+    border-top: 1px dashed var(--border);
     margin-top: 15px;
     background-color: rgba(0, 0, 0, .3);
 }
 
 .content > p {
-    color: white;
+    color: var(--text);
 }
 
 .list-desc p {
@@ -288,9 +311,9 @@ tag {
 }
 
 tag[type="required"] {
-    background-color: #d83f39;
+    background-color: var(--tag-required);
     color: white;
-    box-shadow: 0 0 5px 0 #d83f39;
+    box-shadow: 0 0 5px 0 var(--tag-required);
 }
 
 tag[type="required"]:before {
@@ -298,9 +321,9 @@ tag[type="required"]:before {
 }
 
 tag[type="default"] {
-    background-color: #047d37;
+    background-color: var(--tag-default);
     color: white;
-    box-shadow: 0 0 5px 0 #047d37;
+    box-shadow: 0 0 5px 0 var(--tag-default);
 }
 
 tag[type="default"]:before {
@@ -321,8 +344,8 @@ badge {
 }
 
 badge[type="c"] {
-    background-color: #ff9f1c;
-    box-shadow: 0 0 5px 0 #ff9f1c;
+    background-color: var(--badge-controller);
+    box-shadow: 0 0 5px 0 var(--badge-controller);
 }
 
 badge[type="c"]:before {
@@ -330,8 +353,8 @@ badge[type="c"]:before {
 }
 
 badge[type="d"] {
-    background-color: #ee4266;
-    box-shadow: 0 0 5px 0 #ee4266;
+    background-color: var(--badge-decorator);
+    box-shadow: 0 0 5px 0 var(--badge-decorator);
 }
 
 badge[type="d"]:before {
@@ -339,8 +362,8 @@ badge[type="d"]:before {
 }
 
 badge[type="f"] {
-    background-color: #3bb273;
-    box-shadow: 0 0 5px 0 #3bb273;
+    background-color: var(--badge-function);
+    box-shadow: 0 0 5px 0 var(--badge-function);
 }
 
 badge[type="f"]:before {
@@ -348,8 +371,8 @@ badge[type="f"]:before {
 }
 
 badge[type="t"] {
-    background-color: #0466c8;
-    box-shadow: 0 0 5px 0 #0466c8;
+    background-color: var(--badge-type);
+    box-shadow: 0 0 5px 0 var(--badge-type);
 }
 
 badge[type="t"]:before {

@@ -1,34 +1,110 @@
 import React from 'preact';
+import { observable, action } from 'mobx';
+import { observer } from 'mobx-react';
 import './App.scss';
 
-const globalSymbol = '__BYAKKO_DEV__';
+const globalSymbol = 'byakko';
 
-let t = '';
-let x = 0;
+class Store {
+    @observable
+    isConnected = false;
 
-addEventListener('message', e => {
-    t = JSON.stringify(e);
+    @observable
+    active = 'log';
+
+    @action
+    setActive(active: string) {
+        this.active = active;
+    }
+
+    @observable
+    msgs: Array<any> = [];
+
+    @action
+    pushMsg(msg: any) {
+        this.msgs.push(msg);
+    }
+
+    @action
+    clear() {
+        this.msgs = [];
+        this.isConnected = false;
+    }
+
+    @action
+    connect() {
+        this.clear();
+        this.isConnected = true;
+    }
+}
+
+const context = new Store();
+
+const conn = chrome.runtime.connect({
+    name: 'panel',
 });
 
-export default class App extends React.Component {
+conn.postMessage({
+    name: 'init',
+    tabId: chrome.devtools.inspectedWindow.tabId
+});
 
-    render() {
-        if (!(globalSymbol in window) && false) {
-            return (
-                <div class="over-bg">
-                    <span>Cannot connect with Byakko instance</span>
-                    <span class="try-again">Click anywhere to try again...</span>
-                </div>
-            );
-        }
+conn.onMessage.addListener(msg => {
+    if (!msg || !msg.name || !msg.data) {
+        return;
+    }
 
-        x += 1;
+    switch (msg.name) {
+        case 'connect':
+            context.connect();
+            break;
+        case 'die':
+            context.clear();
+            break;
+    }
+});
 
+
+export default observer(() => {
+    if (!(globalSymbol in window) && false) {
         return (
-            <div class="app" onClick={() => this.forceUpdate()}>
-                hello {x}
-                {t}
+            <div class="over-bg">
+                <span>Cannot connect with Byakko instance</span>
+                <span class="try-again">Click anywhere to try again...</span>
             </div>
         );
     }
-}
+
+    const navItems = [
+        { name: 'Log', key: 'log' },
+        { name: 'Actions', key: 'actions' },
+        { name: 'Tasks', key: 'tasks' },
+        { name: 'Data', key: 'data' },
+    ].map(x => (
+        <div
+            key={x.key}
+            class="tab"
+            onClick={() => context.setActive(x.key)}
+            data-is-active={context.active === x.key}
+        >
+            {x.name}
+        </div>
+    ));
+
+    const msgs = context.msgs.map(x => JSON.stringify(x, null, 4));
+
+    return (
+        <div class="app">
+            <div class="nav">
+                <div class="logo">Byakko</div>
+                {navItems}
+                <div class="status" data-is-connected={context.isConnected}>
+                    {context.isConnected ? 'connected' : 'disconnected'}
+                </div>
+            </div>
+            <pre>
+                {msgs}
+            </pre>
+        </div>
+    );
+});

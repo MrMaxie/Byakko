@@ -1,19 +1,49 @@
-window.addEventListener('message', event => {
+window.window.addEventListener('message', event => {
+    const msg = event.data;
+
+    if (typeof msg !== 'object'
+        || msg === null
+        || msg.source !== 'byakko-inspect-page') {
+        return;
+    }
+
+    chrome.runtime.sendMessage({
+        name: msg.name,
+        data: msg.data,
+    });
+});
+
+chrome.runtime.onMessage.addListener(msg => {
+    msg.source = 'byakko-inspect-devtools';
+    window.postMessage(msg, '*');
+});
+
+window.window.addEventListener('beforeunload', () => {
+    window.window.postMessage({
+        name: 'die',
+        data: 'die',
+        source: 'byakko-inspect-page',
+    }, '*');
+});
+
+window.window.addEventListener('message', event => {
     if (event.source !== window) {
         return;
     }
 
-    const message = event.data;
+    const msg = event.data;
 
-    if (typeof message !== 'object' || message === null ||
-        message.source !== 'byakko-inspect-page') {
+    if (typeof msg !== 'object'
+        || msg === null
+        || msg.source !== 'byakko-inspect-devtools') {
         return;
     }
 
-    chrome.runtime.sendMessage(message);
+    console.log('devtools says', msg);
 });
 
-chrome.runtime.onMessage.addListener(request => {
-    request.source = 'byakko-inspect-devtools';
-    window.postMessage(request, '*');
-});
+window.window.postMessage({
+    name: 'connect',
+    data: 'connect',
+    source: 'byakko-inspect-devtools',
+}, '*');

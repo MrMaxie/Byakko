@@ -10,13 +10,14 @@
         "baseUrl": "./src",
         "moduleResolution": "node",
         "noImplicitUseStrict": true,
-        "importHelpers": true,
+        "importHelpers": false,
         "emitDecoratorMetadata": true,
         "allowSyntheticDefaultImports": true,
         "experimentalDecorators": true,
         "esModuleInterop": true,
         "noImplicitReturns": false,
         "removeComments": true,
+        "declaration": true,
         "paths": {
             "~/*": [
                 "./*"

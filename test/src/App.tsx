@@ -1,8 +1,9 @@
 import React from 'preact';
 import { observable, action } from 'mobx';
-import { Core, If, Each, later, isLater, task } from 'byakko';
+import { Core, If, Each, later, task } from 'byakko';
 
 const core = new Core();
+console.log(core.dev, 'lol');
 core.dev();
 
 type Item = {
