@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="author" content="Maciej Maxie Mieńko">
         <title>Byakko</title>
+        <link rel="icon" type="image/png" href="assets/_logo.png" >
         <link rel="stylesheet" href="assets/syntax-style.css" >
         <link rel="stylesheet" href="assets/style.css" >
         <link href="https://fonts.googleapis.com/css2?family=Fira+Code&amp;family=Fira+Sans:wght@200;400;700&amp;display=swap" rel="stylesheet">
@@ -24,7 +25,7 @@
                 <a href="#welcome">
                     <badge type="e"></badge> <span>Welcome</span>
                 </a>
-                <div class="header"><span>Docs</span></div>
+                <div class="header"><span>Guides</span></div>
                 <% for (const x of items) { %>
                     <% if (x.type) continue; %>
                     <a href="#<%= x.hash %>">

@@ -1,0 +1,11 @@
+{
+    "name": "byakko-monorepo",
+    "scripts": {
+        "install": "cd docs & npm i & cd ../extension & npm i & cd ../module & npm i & cd ../test & npm i",
+        "build": "cd docs & npm run build & cd ../extension & npm run build & cd ../module & npm run build",
+        "watch": "concurrently \"cd docs & npm run build:watch\" \"cd extension & npm run build:watch\" \"cd module & npm run build:watch\" \"cd test & npm run build:watch\""
+    },
+    "dependencies": {
+        "concurrently": "5.3.0"
+    }
+}

@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="author" content="Maciej Maxie Mieńko">
         <title>Byakko</title>
+        <link rel="icon" type="image/png" href="assets/_logo.png" >
         <link rel="stylesheet" href="assets/syntax-style.css" >
         <link rel="stylesheet" href="assets/style.css" >
         <link href="https://fonts.googleapis.com/css2?family=Fira+Code&amp;family=Fira+Sans:wght@200;400;700&amp;display=swap" rel="stylesheet">
@@ -25,74 +25,74 @@
                 <a href="#welcome">
                     <badge type="e"></badge> <span>Welcome</span>
                 </a>
-                <div class="header"><span>Docs</span></div>
-
-
+                <div class="header"><span>Guides</span></div>
+                
+                    
                     <a href="#Get-Started">
                         <badge type=" "></badge> <span>Get Started</span>
                     </a>
-
-
+                
+                    
                     <a href="#Installation">
                         <badge type=" "></badge> <span>Installation</span>
                     </a>
-
-
+                
+                    
                     <a href="#Concept">
                         <badge type=" "></badge> <span>Concept</span>
                     </a>
-
-
+                
+                    
                     <a href="#Services">
                         <badge type=" "></badge> <span>Services</span>
                     </a>
-
-
-
-
-
-
-
+                
+                    
+                    
+                    
+                    
+                    
+                    
                 <div class="header"><span>API</span></div>
-
-
-
-
-
-
+                
+                    
+                    
+                    
+                    
+                    
                     <a href="#asAction">
                         <badge type="d"></badge> <span>asAction</span>
                     </a>
-
-
+                
+                    
                     <a href="#asController">
                         <badge type="d"></badge> <span>asController</span>
                     </a>
-
-
+                
+                    
                     <a href="#Each">
                         <badge type="c"></badge> <span>Each</span>
                     </a>
-
-
+                
+                    
                     <a href="#If">
                         <badge type="c"></badge> <span>If</span>
                     </a>
-
-
+                
+                    
                     <a href="#later">
                         <badge type="f"></badge> <span>later</span>
                     </a>
-
-
+                
+                    
                     <a href="#Unless">
                         <badge type="c"></badge> <span>Unless</span>
                     </a>
-
+                
             </div>
         </aside>
         <div class="content">
-
+            
                 <h1 id="Get-Started">
                     <a href="#Get-Started">#</a>
                     Get Started
@@ -187,7 +187,7 @@
 </ol>
 <p>Byakko's second greatest advantage is the concept that mix multiple needed programming design patterns in cleanest possible way.</p>
 
-
+            
                 <h1 id="Installation">
                     <a href="#Installation">#</a>
                     Installation
@@ -198,7 +198,7 @@
 <p>Also we need to set-up some compilation flow. You can to use TypeScript compilation ifself or some packing library like <a href="https://fuse-box.org/">Fuse-Box</a>.</p>
 <p>Thats all!</p>
 
-
+            
                 <h1 id="Concept">
                     <a href="#Concept">#</a>
                     Concept
@@ -427,14 +427,14 @@
     └── Entry.ts
 </code></pre>
 
-
+            
                 <h1 id="Services">
                     <a href="#Services">#</a>
                     Services
                 </h1>
                 <p>Services in most places are known as reusable utilities. It's also mostly true for Byakko. First of all, Service is also singleton here. In general services should make our live easier, be as deticated for current user/page etc as possible. Their content should change as rarely as possible and should not concern any single place on the page.</p>
 
-
+            
                 <h1 id="asAction">
                     <a href="#asAction">#</a>
                     asAction
@@ -484,7 +484,7 @@ class User {
 }
 </code></pre>
 
-
+            
                 <h1 id="asController">
                     <a href="#asController">#</a>
                     asController
@@ -534,7 +534,7 @@ class User {
 }
 </code></pre>
 
-
+            
                 <h1 id="Each">
                     <a href="#Each">#</a>
                     Each
@@ -599,7 +599,7 @@ const ExampleComponent = () =&gt; (
 // ExampleComponent will be rendered once
 </code></pre>
 
-
+            
                 <h1 id="If">
                     <a href="#If">#</a>
                     If
@@ -657,7 +657,7 @@ const ExampleComponent = () =&gt; (
 // ExampleComponent will be rendered once, &lt;If/&gt; will be always synced with store
 </code></pre>
 
-
+            
                 <h1 id="later">
                     <a href="#later">#</a>
                     later
@@ -731,7 +731,7 @@ logValueOnChange(later(store, 'value')); // prints 'test?'
 store.value = 'test!'; // prints 'test!'
 </code></pre>
 
-
+            
                 <h1 id="Unless">
                     <a href="#Unless">#</a>
                     Unless
@@ -763,7 +763,7 @@ store.value = 'test!'; // prints 'test!'
 </div>
 </div>
 
-
+            
         </div>
     </body>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.21.0/prism.min.js" integrity="sha512-WkVkkoB31AoI9DAk6SEEEyacH9etQXKUov4JRRuM1Y681VsTq7jYgrRw06cbP6Io7kPsKx+tLFpH/HXZSZ2YEQ==" crossorigin="anonymous"></script>

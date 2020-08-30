@@ -163,6 +163,11 @@ aside .list {
 
 .content {
     padding: 0 50px 25px;
+    max-width: 1000px;
+    margin: 0 auto;
+    text-align: justify;
+    font-size: 1.05rem;
+    line-height: 2rem;
 }
 
 .content img {
