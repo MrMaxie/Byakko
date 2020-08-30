@@ -49,7 +49,7 @@ task('build', async () => {
 });
 
 task('build:watch', ['build'], () => {
-    const { vendor, app } = initFuse();
+    const { vendor, app, assets } = initFuse();
 
     vendor.watch();
     app.watch();
