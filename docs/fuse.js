@@ -81,13 +81,13 @@ task('build', async () => {
     const sortedEntries = _sortBy(entries, ['order', 'orderName']);
 
     const res = await ejs.renderFile(join(__dirname, 'src', 'index.ejs'), { items: sortedEntries });
-    await writeFile(join(__dirname, 'dist', 'index.html'), res, { encoding: 'utf8' });
+    await writeFile(join(__dirname, 'index.html'), res, { encoding: 'utf8' });
     return true;
 });
 
 task('build:watch', ['build'], () => {
     const server = new StaticServer({
-        rootPath: join(__dirname, 'dist').concat('\\'),
+        rootPath: join(__dirname).concat('\\'),
         port: 9090,
     })
 
